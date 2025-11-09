@@ -112,7 +112,7 @@ function renderProducts(sectionId, products = []) {
 }
 
 
-
+updateCartCount();
 // =========================
 // INITIAL RENDER
 // =========================
