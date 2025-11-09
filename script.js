@@ -97,12 +97,14 @@ function renderProducts(sectionId, products = []) {
     `;
 
     // ✅ Navigate to product details safely
-    card.addEventListener("click", () => {
-      const url = new URL("product-details.html", window.location.origin);
-      url.searchParams.set("name", product.name);
-      url.searchParams.set("price", product.price);
-      url.searchParams.set("img", product.img);
-      window.location.href = url.toString();
+    card.addEventListener("click", function () {
+      window.location.href =
+        "product-details.html?name=" +
+        encodeURIComponent(product.name) +
+        "&price=" +
+        encodeURIComponent(product.price) +
+        "&img=" +
+        encodeURIComponent(product.img);
     });
 
     container.appendChild(card);
