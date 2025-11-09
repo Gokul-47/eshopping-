@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Stackly Shopping</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #0b0b0b;
+      color: #fff;
+      font-family: Roboto, Arial, sans-serif;
+    }
+
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #ffcc00;
+      text-align: center;
+      margin-bottom: 40px;
+      letter-spacing: 1px;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .stat-card {
+      flex: 1 1 200px;
+      background: #0f0f0f;
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-card h2 {
+      color: #ffcc00;
+      margin-bottom: 10px;
+    }
+
+    .stat-card p {
+      font-size: 18px;
+      color: #ccc;
+    }
+
+    .recent-products {
+      margin-top: 30px;
+    }
+
+    .recent-products h3 {
+      color: #ffcc00;
+      margin-bottom: 15px;
+    }
+
+    .recent-products table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .recent-products th,
+    .recent-products td {
+      padding: 12px;
+      border-bottom: 1px solid #222;
+      text-align: left;
+      color: #fff;
+    }
+
+    .recent-products th {
+      color: #ffcc00;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      background: #0f0f0f;
+      color: #ccc;
+      border-top: 1px solid #222;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+     <a href="index.html" class="logo">Stackly</a>
+
+    </div>
+    <div class="nav-center">
+     <div class="dropdown">
+    <a href="index.html" class="active">Home ▾</a>
+    <div class="dropdown-menu">
+      <a href="home2.html">Home 2</a>
+      
+    </div>
+  </div>
+
+  <a href="dashboard.html">Dashboard</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart(<span id="cart-count">0</span>)</a>
+    </div>
+  </header>
+
+  <!-- Dashboard -->
+  <div class="dashboard-container">
+    <h1>Admin Dashboard</h1>
+
+    <!-- Stats Cards -->
+    <div class="stats">
+      <div class="stat-card">
+        <h2 id="total-cart">0</h2>
+        <p>Total Products in Cart</p>
+      </div>
+      <div class="stat-card">
+        <h2 id="total-categories">0</h2>
+        <p>Total Categories</p>
+      </div>
+      <div class="stat-card">
+        <h2 id="total-products">0</h2>
+        <p>Total Products Loaded</p>
+      </div>
+    </div>
+
+    <!-- Recent Products Table -->
+    <div class="recent-products">
+      <h3>Products in Cart</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody id="cart-table-body">
+          <!-- Filled dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Update cart count in navbar
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const countEl = document.getElementById("cart-count");
+      if (countEl) countEl.textContent = cart.length;
+    }
+
+    // Populate dashboard stats
+    function loadDashboard() {
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  const safeCart = Array.isArray(cart) ? cart : [];
+
+  const categories = ["Men", "Women", "Kids", "Beauty", "Electronics", "Appliances"];
+  const products = safeCart; // Using cart items for demo
+
+  // ✅ Update summary stats safely
+  const totalCartEl = document.getElementById("total-cart");
+  const totalCategoriesEl = document.getElementById("total-categories");
+  const totalProductsEl = document.getElementById("total-products");
+
+  if (totalCartEl) totalCartEl.textContent = safeCart.length;
+  if (totalCategoriesEl) totalCategoriesEl.textContent = categories.length;
+  if (totalProductsEl) totalProductsEl.textContent = products.length;
+
+  // ✅ Render product list in dashboard table
+  const tbody = document.getElementById("cart-table-body");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+
+  if (safeCart.length === 0) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td colspan="3">No products in the cart.</td>`;
+    tbody.appendChild(tr);
+    return;
+  }
+
+  safeCart.forEach((product) => {
+    const tr = document.createElement("tr");
+
+    // Basic sanitization to prevent HTML injection
+    const name = String(product.name || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const price = String(product.price || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const img = String(product.img || "");
+
+    tr.innerHTML = `
+      <td>
+        <img src="${img}" alt="${name}" width="50" height="50" loading="lazy" />
+      </td>
+      <td>${name}</td>
+      <td>${price}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+    // Initialize
+    updateCartCount();
+    loadDashboard();
+  </script>
+</body>
+</html>

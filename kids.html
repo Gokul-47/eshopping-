@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kids | Stackly Shopping</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+     <a href="index.html" class="logo">Stackly</a>
+
+    </div>
+    <div class="nav-center">
+      <div class="dropdown">
+    <a href="index.html" class="active">Home ▾</a>
+    <div class="dropdown-menu">
+      <a href="home2.html">Home 2</a>
+      
+    </div>
+  </div>
+
+  <a href="dashboard.html">Dashboard</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </div>
+  </header>
+
+  <!-- Category Bar -->
+  <nav class="category-bar">
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html" class="active">Kids</a>
+    <a href="beauty.html">Beauty</a>
+    <a href="electronics.html">Electronics</a>
+    <a href="appliances.html">Appliances</a>
+  </nav>
+
+  <!-- Kids Section -->
+  <section class="category-section">
+    <h1>Kids’ Collection</h1>
+    <div class="product-container" id="kids-products"></div>
+    <button id="load-more" class="btn-load">Load More</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    const kidsProducts = [
+      { img: "images/k1.webp", name: "Boys Printed T-Shirt", price: "₹499", alt: "Stylish Boys Printed T-Shirt Cotton Wear" },
+  { img: "images/k2.webp", name: "Girls Party Dress", price: "₹899", alt: "Beautiful Girls Party Dress with Bow Design" },
+  { img: "images/k3.webp", name: "Boys Denim Shorts", price: "₹699", alt: "Boys Denim Shorts with Elastic Waistband" },
+  { img: "images/k4.webp", name: "Girls Frock", price: "₹1,099", alt: "Floral Print Girls Frock Summer Wear" },
+  { img: "images/k5.webp", name: "Kids Hoodie", price: "₹899", alt: "Warm Kids Hoodie for Winter Wear" },
+  { img: "images/k6.webp", name: "Baby Romper", price: "₹599", alt: "Soft Cotton Baby Romper for Newborns" },
+  { img: "images/k7.webp", name: "Kids Jeans", price: "₹899", alt: "Comfortable Kids Jeans Denim Wear" },
+  { img: "images/k8.webp", name: "Cartoon Print Tee", price: "₹499", alt: "Cartoon Print Kids T-Shirt" },
+  { img: "images/k9.webp", name: "Kids Track Suit", price: "₹1,199", alt: "Sporty Kids Track Suit for Boys and Girls" },
+  { img: "images/k10.webp", name: "Girls Ethnic Dress", price: "₹1,399", alt: "Traditional Girls Ethnic Dress with Dupatta" },
+  { img: "images/k11.webp", name: "Boys Casual Shirt", price: "₹799", alt: "Casual Boys Shirt for Daily Wear" },
+  { img: "images/k12.webp", name: "Kids Sandals", price: "₹699", alt: "Comfortable Kids Sandals for Outdoor Use" }
+    ];
+
+    const container = document.getElementById("kids-products");
+    const loadMoreBtn = document.getElementById("load-more");
+    let visibleCount = 8;
+
+    function renderProducts(limit) {
+  // ✅ Clear container safely
+  container.innerHTML = "";
+
+  // ✅ Ensure valid product list
+  const safeProducts = Array.isArray(kidsProducts) ? kidsProducts : [];
+  const visibleProducts = safeProducts.slice(0, limit);
+
+  if (visibleProducts.length === 0) {
+    container.innerHTML = "<p>No products available.</p>";
+    return;
+  }
+
+  // ✅ Sanitization helper to prevent XSS
+  function escapeHTML(str) {
+    return String(str).replace(/[&<>"']/g, (m) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[m]));
+  }
+
+  visibleProducts.forEach((product) => {
+    // ✅ Escape all dynamic text
+    const name = escapeHTML(product.name || "");
+    const price = escapeHTML(product.price || "");
+    const img = String(product.img || "");
+
+    // ✅ Create product card
+    const card = document.createElement("div");
+    card.classList.add("product-card");
+
+    card.innerHTML = `
+      <img src="${img}" alt="${name}" loading="lazy">
+      <div class="product-info">
+        <h4>${name}</h4>
+        <p class="price">${price}</p>
+      </div>
+    `;
+
+    // ✅ Product click → details page
+    card.addEventListener("click", function () {
+      window.location.href =
+        "product-details.html?name=" +
+        encodeURIComponent(product.name) +
+        "&price=" +
+        encodeURIComponent(product.price) +
+        "&img=" +
+        encodeURIComponent(product.img);
+    });
+
+    container.appendChild(card);
+  });
+
+  // ✅ Hide Load More when done
+  if (loadMoreBtn && limit >= safeProducts.length) {
+    loadMoreBtn.style.display = "none";
+  }
+}
+
+
+    loadMoreBtn.addEventListener("click", function () {
+      visibleCount += 4;
+      renderProducts(visibleCount);
+    });
+
+    renderProducts(visibleCount);
+
+    // ✅ Cart Count Update
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const countEl = document.getElementById("cart-count");
+      if (countEl) countEl.textContent = cart.length;
+    }
+
+    updateCartCount();
+  </script>
+</body>
+</html>

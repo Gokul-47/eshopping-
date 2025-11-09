@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details | Stackly Shopping</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .details-section {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 70vh;
+      padding: 2rem;
+      background: #111;
+      color: #fff;
+    }
+
+    .details-container {
+      display: flex;
+      gap: 2rem;
+      max-width: 900px;
+      width: 100%;
+      background: #0f0f0f;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+    }
+
+    .details-image img {
+      max-width: 300px;
+      border-radius: 12px;
+    }
+
+    .details-info h1 {
+      margin-bottom: 1rem;
+      color: #ffcc00;
+    }
+
+    .details-info .price {
+      font-size: 1.5rem;
+      margin: 0.5rem 0 1rem;
+      color: #fff;
+    }
+
+    .btn-add {
+      padding: 12px 20px;
+      background: #ffcc00;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-add:hover {
+      background: #ffd633;
+    }
+
+    /* ================= MOBILE PRODUCT DETAILS FIX (320px – 480px) ================= */
+@media (max-width: 480px) {
+
+  .details-section {
+    padding: 1rem;
+  }
+
+  .details-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.2rem;
+    gap: 1.5rem;
+  }
+
+  .details-image img {
+    max-width: 220px;
+    width: 100%;
+  }
+
+  .details-info h2 {
+    font-size: 1.3rem;
+  }
+
+  .details-info .price {
+    font-size: 1.2rem;
+  }
+
+  .btn-add {
+    
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  /* Navbar mobile spacing (matches home fix) */
+  .navbar {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .nav-center a, .nav-right a {
+    font-size: 14px;
+    margin: 0 4px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="logo">Stackly</a>
+
+    </div>
+    <div class="nav-center">
+     <div class="dropdown">
+    <a href="index.html" class="active">Home ▾</a>
+    <div class="dropdown-menu">
+      <a href="home2.html">Home 2</a>
+      
+    </div>
+  </div>
+
+  <a href="dashboard.html">Dashboard</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </div>
+  </header>
+
+  <!-- Product Details Section -->
+  <section class="details-section">
+    <div class="details-container">
+      <div class="details-image">
+        <img id="details-img" src="" alt="Product Image" />
+      </div>
+      <div class="details-info">
+        <h1 id="details-name">Product Name</h1>
+        <p id="details-price" class="price">₹0</p>
+        <p id="details-desc">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+          fringilla eros sit amet velit gravida, non vehicula lacus suscipit.
+        </p>
+        <button id="add-to-cart" class="btn-add">Add to Cart </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
+
+  <!-- Global Cart Utility -->
+  <script>
+    function addToCart(product) {
+      let cart = JSON.parse(localStorage.getItem("cart"));
+      if (!Array.isArray(cart)) cart = [];
+      cart.push(product);
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const countEl = document.getElementById("cart-count");
+      if (countEl) countEl.textContent = cart.length;
+    }
+
+    // Update cart count on page load
+    updateCartCount();
+  </script>
+
+  <!-- Product Details Script -->
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    const price = params.get("price");
+    const img = params.get("img");
+
+    if (name && price && img) {
+      document.getElementById("details-name").textContent = name;
+      document.getElementById("details-price").textContent = price;
+      document.getElementById("details-img").src = img;
+    }
+
+    document.getElementById("add-to-cart").addEventListener("click", () => {
+      const product = { name, price, img };
+      addToCart(product);
+      updateCartCount();
+      alert("✅ Added to Cart!");
+    });
+  </script>
+</body>
+</html>

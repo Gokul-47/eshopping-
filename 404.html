@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 | Page Not Found</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .error-page {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+      background: #0b0b0b;
+      color: #fff;
+    }
+
+    .error-page h1 {
+      font-size: 6rem;
+      font-weight: 700;
+      color: #00bcd4;
+      margin-bottom: 15px;
+    }
+
+    .error-page p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      color: #ccc;
+    }
+
+    .error-btn {
+      background: #00bcd4;
+      color: #000;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .error-btn:hover {
+      background: #0097a7;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="logo">Stackly Shopping</div>
+    </div>
+    <div class="nav-center">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </header>
+
+  <!-- 404 Section -->
+  <section class="error-page">
+    <h1>404</h1>
+    <p>Oops! The page you're looking for doesn't exist or has moved.</p>
+    <a class="error-btn" href="index.html">Go Back Home</a>
+  </section>
+
+  <footer>
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>

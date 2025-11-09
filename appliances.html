@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appliances | Stackly Shopping</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="logo">Stackly</a>
+
+    </div>
+    <div class="nav-center">
+      <div class="dropdown">
+    <a href="index.html" class="active">Home ▾</a>
+    <div class="dropdown-menu">
+      <a href="home2.html">Home 2</a>
+      
+    </div>
+  </div>
+  <a href="dashboard.html">Dashboard</a>
+  </div>
+
+    <div class="nav-right">
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart(<span id="cart-count">0</span>)</a>
+    </div>
+  </header>
+
+  <!-- Category Bar -->
+  <nav class="category-bar">
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="beauty.html">Beauty</a>
+    <a href="electronics.html">Electronics</a>
+    <a href="appliances.html" class="active">Appliances</a>
+  </nav>
+
+  <!-- Appliances Section -->
+  <section class="category-section">
+    <h1>Home & Kitchen Appliances</h1>
+    <div class="product-container" id="appliances-products"></div>
+    <button id="load-more" class="btn-load">Load More</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    const appliancesProducts = [
+      { img: "images/a1.webp", name: "Air Conditioner 1.5 Ton", price: "₹33,499", alt: "Split Air Conditioner 1.5 Ton" },
+  { img: "images/a2.webp", name: "Washing Machine 7kg", price: "₹19,999", alt: "Front Load Washing Machine 7kg" },
+  { img: "images/a3.webp", name: "Refrigerator 240L", price: "₹18,499", alt: "Double Door Refrigerator 240 Liters" },
+  { img: "images/a4.webp", name: "Microwave Oven", price: "₹7,299", alt: "Microwave Oven for Kitchen" },
+  { img: "images/a5.webp", name: "Induction Cooktop", price: "₹2,899", alt: "Electric Induction Cooktop" },
+  { img: "images/a6.webp", name: "Vacuum Cleaner", price: "₹5,499", alt: "Compact Vacuum Cleaner" },
+  { img: "images/a7.webp", name: "Ceiling Fan", price: "₹1,899", alt: "High-Speed Ceiling Fan" },
+  { img: "images/a8.webp", name: "Air Purifier", price: "₹8,999", alt: "Room Air Purifier" },
+  { img: "images/a9.webp", name: "Water Purifier", price: "₹9,499", alt: "RO Water Purifier" },
+  { img: "images/a10.webp", name: "Mixer Grinder", price: "₹2,599", alt: "Kitchen Mixer Grinder Set" },
+  { img: "images/a11.webp", name: "Electric Kettle", price: "₹1,099", alt: "Electric Water Kettle" },
+  { img: "images/a12.webp", name: "Steam Iron", price: "₹1,499", alt: "Handheld Steam Iron" }
+    ];
+
+    const container = document.getElementById("appliances-products");
+    const loadMoreBtn = document.getElementById("load-more");
+    let visibleCount = 8;
+
+    function renderProducts(limit) {
+  container.innerHTML = "";
+
+  // Helper to escape potentially unsafe text
+  function escapeHTML(str) {
+    return String(str).replace(/[&<>"']/g, (m) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[m]));
+  }
+
+  appliancesProducts.slice(0, limit).forEach((product) => {
+    const card = document.createElement("div");
+    card.classList.add("product-card");
+
+    // Create product image safely
+    const img = document.createElement("img");
+    img.src = product.img;
+    img.alt = escapeHTML(product.name);
+    img.loading = "lazy"; // Also improves performance
+
+    // Product info container
+    const info = document.createElement("div");
+    info.classList.add("product-info");
+
+    // Product name
+    const nameEl = document.createElement("h4");
+    nameEl.textContent = product.name;
+
+    // Product price
+    const priceEl = document.createElement("p");
+    priceEl.classList.add("price");
+    priceEl.textContent = product.price;
+
+    // Assemble card
+    info.appendChild(nameEl);
+    info.appendChild(priceEl);
+    card.appendChild(img);
+    card.appendChild(info);
+
+    // Click event — use safe encoded URL
+    card.addEventListener("click", function () {
+      window.location.href =
+        "product-details.html?name=" +
+        encodeURIComponent(product.name) +
+        "&price=" +
+        encodeURIComponent(product.price) +
+        "&img=" +
+        encodeURIComponent(product.img);
+    });
+
+    container.appendChild(card);
+  });
+
+  // Hide load more if all products loaded
+  if (limit >= appliancesProducts.length) {
+    loadMoreBtn.style.display = "none";
+  }
+}
+
+    loadMoreBtn.addEventListener("click", function () {
+      visibleCount += 4;
+      renderProducts(visibleCount);
+    });
+
+    renderProducts(visibleCount);
+
+    // ✅ Cart Count Update
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const countEl = document.getElementById("cart-count");
+      if (countEl) countEl.textContent = cart.length;
+    }
+
+    updateCartCount();
+  </script>
+</body>
+</html>

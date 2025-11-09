@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Electronics | Stackly Shopping</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="logo">Stackly</a>
+
+    </div>
+    <div class="nav-center">
+      <div class="dropdown">
+    <a href="index.html" class="active">Home ▾</a>
+    <div class="dropdown-menu">
+      <a href="home2.html">Home 2</a>
+      
+    </div>
+  </div>
+
+  <a href="dashboard.html">Dashboard</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </div>
+  </header>
+
+  <!-- Category Bar -->
+  <nav class="category-bar">
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="beauty.html">Beauty</a>
+    <a href="electronics.html" class="active">Electronics</a>
+    <a href="appliances.html">Appliances</a>
+  </nav>
+
+  <!-- Electronics Section -->
+  <section class="category-section">
+    <h1>Electronics Collection</h1>
+    <div class="product-container" id="electronics-products"></div>
+    <button id="load-more" class="btn-load">Load More</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    const electronicsProducts = [
+      { img: "images/e1.webp", name: "Bluetooth Headphones", price: "₹1,299", alt: "Wireless Bluetooth Headphones with Mic" },
+  { img: "images/e2.webp", name: "Smartphone 5G", price: "₹15,999", alt: "Latest 5G Smartphone with Dual Camera" },
+  { img: "images/e3.webp", name: "Smartwatch Pro", price: "₹3,499", alt: "Smartwatch Pro with Fitness Tracker" },
+  { img: "images/e4.webp", name: "Laptop Backpack", price: "₹899", alt: "Water Resistant Laptop Backpack" },
+  { img: "images/e5.webp", name: "LED Monitor 24\"", price: "₹9,999", alt: "24 inch Full HD LED Monitor" },
+  { img: "images/e6.webp", name: "Portable Speaker", price: "₹1,599", alt: "Bluetooth Portable Speaker" },
+  { img: "images/e7.webp", name: "Gaming Mouse", price: "₹799", alt: "RGB Gaming Mouse with Adjustable DPI" },
+  { img: "images/e8.webp", name: "Mechanical Keyboard", price: "₹2,499", alt: "RGB Mechanical Keyboard for Gaming" },
+  { img: "images/e9.webp", name: "VR Headset", price: "₹12,999", alt: "Virtual Reality VR Headset" },
+  { img: "images/e10.webp", name: "External SSD 1TB", price: "₹7,499", alt: "1TB Portable External SSD Drive" },
+  { img: "images/e11.webp", name: "Action Camera", price: "₹6,999", alt: "Waterproof Action Camera 4K" },
+  { img: "images/e12.webp", name: "Drone Mini", price: "₹14,999", alt: "Mini Drone with HD Camera" }
+
+    ];
+
+    const container = document.getElementById("electronics-products");
+    const loadMoreBtn = document.getElementById("load-more");
+    let visibleCount = 8;
+
+   function renderProducts(limit) {
+  // ✅ Ensure container exists
+  if (!container) return;
+  container.innerHTML = "";
+
+  // ✅ Ensure product list is valid
+  const safeProducts = Array.isArray(electronicsProducts) ? electronicsProducts : [];
+
+  // ✅ Slice products for current display limit
+  const visibleProducts = safeProducts.slice(0, limit);
+
+  if (visibleProducts.length === 0) {
+    container.innerHTML = "<p>No products available.</p>";
+    return;
+  }
+
+  visibleProducts.forEach(product => {
+    // ✅ Basic sanitization to prevent injection
+    const name = String(product.name || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const price = String(product.price || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const img = String(product.img || "");
+
+    // ✅ Create product card
+    const card = document.createElement("div");
+    card.classList.add("product-card");
+
+    card.innerHTML = `
+      <img src="${img}" alt="${name}" loading="lazy">
+      <div class="product-info">
+        <h4>${name}</h4>
+        <p class="price">${price}</p>
+      </div>
+    `;
+
+    // ✅ Click → product details page
+    card.addEventListener("click", () => {
+      window.location.href =
+        "product-details.html?name=" +
+        encodeURIComponent(product.name) +
+        "&price=" +
+        encodeURIComponent(product.price) +
+        "&img=" +
+        encodeURIComponent(product.img);
+    });
+
+    container.appendChild(card);
+  });
+
+  // ✅ Hide “Load More” when all products shown
+  if (loadMoreBtn && limit >= safeProducts.length) {
+    loadMoreBtn.style.display = "none";
+  }
+}
+
+
+    loadMoreBtn.addEventListener("click", function () {
+      visibleCount += 4;
+      renderProducts(visibleCount);
+    });
+
+    renderProducts(visibleCount);
+
+    // ✅ Cart Count Update
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const countEl = document.getElementById("cart-count");
+      if (countEl) countEl.textContent = cart.length;
+    }
+
+    updateCartCount();
+  </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Stackly Shopping</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .login-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 70vh;
+      background: linear-gradient(to right, #222, #111);
+    }
+
+    .login-box {
+      background: #0f0f0f;
+      padding: 2rem 3rem;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      width: 100%;
+      max-width: 400px;
+      color: white;
+      text-align: center;
+    }
+
+    .login-box h1 {
+      margin-bottom: 1.5rem;
+      color: #f5f5f5;
+      letter-spacing: 1px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: #1b1b1b;
+      color: white;
+      font-size: 15px;
+    }
+
+    .login-box input:focus {
+      outline: 2px solid #ffcc00;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background: #ffcc00;
+      color: #000;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-box button:hover {
+      background: #ffd633;
+    }
+
+    .login-box p {
+      margin-top: 1rem;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .login-box a {
+      color: #ffcc00;
+      text-decoration: none;
+    }
+
+    .login-box a:hover {
+      text-decoration: underline;
+    }
+
+    /* Error and success messages */
+    .error {
+      color: #ff4444;
+      font-size: 14px;
+      margin-top: 6px;
+    }
+
+    .success {
+      color: #00e676;
+      font-size: 15px;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="logo">Stackly</a>
+    </div>
+    <div class="nav-center">
+      <div class="dropdown">
+        <a href="index.html" class="active">Home ▾</a>
+        <div class="dropdown-menu">
+          <a href="home2.html">Home 2</a>
+        </div>
+      </div>
+      <a href="dashboard.html">Dashboard</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html" class="active">Login</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </header>
+
+  <!-- Category Bar -->
+  <nav class="category-bar">
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="beauty.html">Beauty</a>
+    <a href="electronics.html">Electronics</a>
+    <a href="appliances.html">Appliances</a>
+  </nav>
+
+  <!-- Login Section -->
+  <section class="login-section">
+    <div class="login-box">
+      <h1>Login to Your Account</h1>
+      <form id="loginForm">
+        <input type="text" id="email" placeholder="Enter Email" required />
+        <div id="emailError" class="error"></div>
+
+        <input type="text" id="phone" placeholder="Enter Phone Number" required maxlength="10" />
+        <div id="phoneError" class="error"></div>
+
+        <input type="password" id="password" placeholder="Enter Password" required />
+        <button type="submit">Login</button>
+      </form>
+      <p>Don’t have an account? <a href="signup.html">Sign up</a></p>
+      <div id="successMessage" class="success"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const emailField = document.getElementById("email");
+    const phoneField = document.getElementById("phone");
+    const passwordField = document.getElementById("password");
+
+    const emailError = document.getElementById("emailError");
+    const phoneError = document.getElementById("phoneError");
+    const successMsg = document.getElementById("successMessage");
+
+    // Validate email format
+    function isValidEmail(email) {
+      const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      return pattern.test(email);
+    }
+
+    // Prevent letters in phone field
+    phoneField.addEventListener("input", () => {
+      phoneField.value = phoneField.value.replace(/[^0-9]/g, "");
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      emailError.textContent = "";
+      phoneError.textContent = "";
+      successMsg.textContent = "";
+
+      const email = emailField.value.trim();
+      const phone = phoneField.value.trim();
+      const pass = passwordField.value.trim();
+
+      let valid = true;
+
+      if (!isValidEmail(email)) {
+        emailError.textContent = "Invalid email format";
+        valid = false;
+      }
+
+      if (phone.length < 10) {
+        phoneError.textContent = "Phone number must be 10 digits";
+        valid = false;
+      }
+
+      if (valid) {
+        // Replace this with your real login check
+        if (email === "admin@example.com" && pass === "1234") {
+          successMsg.textContent = "Login successful! Redirecting...";
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 1500);
+        } else {
+          successMsg.textContent = "Invalid email or password!";
+          successMsg.style.color = "#ff4444";
+        }
+      }
+    });
+  </script>
+</body>
+</html>

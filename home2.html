@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackly Shopping</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+     <a href="index.html" class="logo">Stackly</a>
+
+    </div>
+    <div class="nav-center">
+
+  <div class="dropdown">
+    <a href="index.html" class="active">Home ▾</a>
+    <div class="dropdown-menu">
+      <a href="home2.html">Home 2</a>
+      
+    </div>
+  </div>
+
+  <a href="dashboard.html">Dashboard</a>
+
+</div>
+
+    <div class="nav-right">
+      <a href="login.html">Login</a>
+      <a href="cart.html" id="cart-link">Cart(<span id="cart-count">0</span>)</a>
+
+    </div>
+  </header>
+    <!-- Hero Banner Slider -->
+  <section class="hero-slider">
+    <div class="slides">
+      <img src="images/banner1.webp" alt="Banner 1" class="slide active" />
+      <img src="images/banner2.webp" alt="Banner 2" class="slide" />
+      <img src="images/banner3.webp" alt="Banner 3" class="slide" />
+    </div>
+  </section>
+
+  <!-- Category Row -->
+  <nav class="category-bar">
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="beauty.html">Beauty</a>
+    <a href="electronics.html">Electronics</a>
+    <a href="appliances.html">Appliances</a>
+  </nav>
+
+
+
+  <!-- Sections -->
+<section class="product-section">
+    <h1>Seasonal Picks</h1>
+    <div class="product-container" id="seasonal-picks"></div>
+  </section>
+
+  <section class="product-section">
+    <h1>Hot Deals</h1>
+    <div class="product-container" id="hot-deals"></div>
+  </section>
+
+  <section class="product-section">
+    <h1>Trending Offers</h1>
+    <div class="product-container" id="trending-offers"></div>
+  </section>
+
+  
+  <section class="product-section">
+    <h1>New Arrivals</h1>
+    <div class="product-container" id="new-arrivals"></div>
+  </section>
+
+
+
+  <!-- Footer Top -->
+<footer class="footer-top">
+  <div class="footer-col">
+    <h3>Stackly Shopping</h3>
+    <p>Your modern shopping destination. We provide the best quality fashion,
+      electronics and daily needs — at fair prices.</p>
+  </div>
+
+  <div class="footer-col">
+    <h4>Quick Links</h4>
+    <ul>
+      <li><a href="men.html">Men</a></li>
+      <li><a href="women.html">Women</a></li>
+      <li><a href="electronics.html">Electronics</a></li>
+      <li><a href="beauty.html">Beauty</a></li>
+      <li><a href="appliances.html">Appliances</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-col">
+    <h4>Follow Us</h4>
+    <div class="social-icons">
+      <a href="404.html"><img src="icons/facebook.svg" alt="Facebook"></a>
+      <a href="404.html"><img src="icons/instagram.svg" alt="Instagram"></a>
+      <a href="404.html"><img src="icons/twitter.svg" alt="Twitter"></a>
+      <a href="404.html"><img src="icons/youtube.svg" alt="YouTube"></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Bottom Footer (Keep Original) -->
+<footer class="footer-bottom">
+  <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+</footer>
+
+
+
+  <script src="script.js"></script>
+  <script>
+    loadHomeProducts(); // initialize sections on home
+    startBannerSlider(); // start auto banner slideshow
+
+    function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const count = cart.length;
+    const countEl = document.getElementById("cart-count");
+    if (countEl) countEl.textContent = count;
+  }
+
+  // Update when page loads
+ 
+  </script>
+  <script src="cart-utils.js"></script>
+
+</body>
+</html>

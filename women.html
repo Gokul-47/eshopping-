@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Women | Stackly Shopping</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+     <a href="index.html" class="logo">Stackly</a>
+
+    </div>
+    <div class="nav-center">
+     <div class="dropdown">
+    <a href="index.html" class="active">Home ▾</a>
+    <div class="dropdown-menu">
+      <a href="home2.html">Home 2</a>
+      
+    </div>
+  </div>
+
+  <a href="dashboard.html">Dashboard</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </div>
+  </header>
+
+  <!-- Category Bar -->
+  <nav class="category-bar">
+    <a href="men.html">Men</a>
+    <a href="women.html" class="active">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="beauty.html">Beauty</a>
+    <a href="electronics.html">Electronics</a>
+    <a href="appliances.html">Appliances</a>
+  </nav>
+
+  <!-- Women Section -->
+  <section class="category-section">
+    <h1>Women’s Collection</h1>
+    <div class="product-container" id="women-products"></div>
+    <button id="load-more" class="btn-load">Load More</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    const womenProducts = [
+      { img: "images/w1.webp", name: "Women’s Stylish Kurti", price: "₹999" },
+      { img: "images/w2.webp", name: "Women’s Crop Top", price: "₹699" },
+      { img: "images/w3.webp", name: "Anarkali Dress", price: "₹1,899" },
+      { img: "images/w4.webp", name: "Women’s Saree", price: "₹1,499" },
+      { img: "images/w5.webp", name: "Party Gown", price: "₹2,299" },
+      { img: "images/w6.webp", name: "Women’s Denim Jacket", price: "₹1,499" },
+      { img: "images/w7.webp", name: "Women’s Leggings", price: "₹499" },
+      { img: "images/w8.webp", name: "Women’s Formal Blazer", price: "₹2,599" },
+      { img: "images/w9.webp", name: "Ethnic Dupatta", price: "₹799" },
+      { img: "images/w10.webp", name: "Casual Top", price: "₹599" },
+      { img: "images/w11.webp", name: "Women’s Jeans", price: "₹1,299" },
+      { img: "images/w12.webp", name: "Designer Kurti", price: "₹1,799" },
+    ];
+
+    const container = document.getElementById("women-products");
+    const loadMoreBtn = document.getElementById("load-more");
+    let visibleCount = 8;
+
+    function renderProducts(limit) {
+  // Defensive checks
+  if (!Array.isArray(womenProducts)) return;
+  container.innerHTML = "";
+
+  // Sanitize helper to prevent script injection
+  const escapeHTML = (str) =>
+    String(str || "").replace(/[&<>"']/g, (m) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[m]));
+
+  // Slice and render products
+  womenProducts.slice(0, limit).forEach((product) => {
+    const name = escapeHTML(product.name);
+    const price = escapeHTML(product.price);
+    const img = escapeHTML(product.img);
+
+    const card = document.createElement("div");
+    card.classList.add("product-card");
+
+    card.innerHTML = `
+      <img src="${img}" alt="${name}" loading="lazy" decoding="async">
+      <div class="product-info">
+        <h4>${name}</h4>
+        <p class="price">${price}</p>
+      </div>
+    `;
+
+    // Navigate to product details safely
+    card.addEventListener("click", function () {
+      window.location.href =
+        "product-details.html?name=" +
+        encodeURIComponent(product.name) +
+        "&price=" +
+        encodeURIComponent(product.price) +
+        "&img=" +
+        encodeURIComponent(product.img);
+    });
+
+    container.appendChild(card);
+  });
+
+  // Hide "Load More" button when all products are shown
+  if (limit >= womenProducts.length) {
+    loadMoreBtn.style.display = "none";
+  }
+}
+
+
+    loadMoreBtn.addEventListener("click", () => {
+      visibleCount += 4;
+      renderProducts(visibleCount);
+    });
+
+    renderProducts(visibleCount);
+
+    // ✅ Cart Count Update
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const countEl = document.getElementById("cart-count");
+      if (countEl) countEl.textContent = cart.length;
+    }
+
+    updateCartCount();
+  </script>
+</body>
+</html>

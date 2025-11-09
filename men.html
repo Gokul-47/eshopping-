@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Men | Stackly Shopping</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+     <a href="index.html" class="logo">Stackly</a>
+
+    </div>
+    <div class="nav-center">
+      <div class="dropdown">
+    <a href="index.html" class="active">Home ▾</a>
+    <div class="dropdown-menu">
+      <a href="home2.html">Home 2</a>
+      
+    </div>
+  </div>
+
+  <a href="dashboard.html">Dashboard</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </div>
+  </header>
+
+  <!-- Category Bar -->
+  <nav class="category-bar">
+    <a href="men.html" class="active">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="beauty.html">Beauty</a>
+    <a href="electronics.html">Electronics</a>
+    <a href="appliances.html">Appliances</a>
+  </nav>
+
+  <!-- Men Section -->
+  <section class="category-section">
+    <h1>Men’s Collection</h1>
+    <div class="product-container" id="men-products"></div>
+    <button id="load-more" class="btn-load">Load More</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    const menProducts = [
+       { img: "images/f1.webp", name: "Men’s Casual Shirt", price: "₹799", alt: "Men’s Casual Shirt in Cotton Fabric" },
+  { img: "images/f2.webp", name: "Men’s Denim Jacket", price: "₹1,899", alt: "Stylish Men’s Denim Jacket Blue Wash" },
+  { img: "images/f3.webp", name: "Men’s T-Shirt", price: "₹499", alt: "Comfortable Men’s T-Shirt Casual Wear" },
+  { img: "images/f4.webp", name: "Men’s Slim Jeans", price: "₹1,499", alt: "Men’s Slim Fit Jeans Stretch Denim" },
+  { img: "images/f5.webp", name: "Formal Shirt", price: "₹1,199", alt: "Classic Men’s Formal Shirt for Office Wear" },
+  { img: "images/f6.webp", name: "Men’s Hoodie", price: "₹1,299", alt: "Warm Men’s Hoodie with Front Pocket" },
+  { img: "images/f7.webp", name: "Sports Shoes", price: "₹2,199", alt: "Men’s Lightweight Sports Shoes for Running" },
+  { img: "images/f8.webp", name: "Casual Pants", price: "₹1,099", alt: "Men’s Casual Pants with Modern Fit" },
+  { img: "images/f9.webp", name: "Kurta Set", price: "₹1,499", alt: "Traditional Men’s Kurta Set for Festivals" },
+  { img: "images/f10.webp", name: "Blazer", price: "₹3,999", alt: "Formal Men’s Blazer for Business or Events" },
+  { img: "images/f11.webp", name: "Men’s Shorts", price: "₹799", alt: "Comfortable Men’s Shorts for Summer" },
+  { img: "images/f12.webp", name: "Leather Jacket", price: "₹4,299", alt: "Genuine Leather Jacket for Men in Brown Color" }
+    ];
+
+    const container = document.getElementById("men-products");
+    const loadMoreBtn = document.getElementById("load-more");
+    let visibleCount = 8; // Show first 8 products
+
+    function renderProducts(limit) {
+  // Clear previous products
+   
+  container.innerHTML = "";
+
+  // ✅ Ensure menProducts is a valid array
+  const safeProducts = Array.isArray(menProducts) ? menProducts : [];
+  const visibleProducts = safeProducts.slice(0, limit);
+
+  // ✅ Handle empty product list
+  if (visibleProducts.length === 0) {
+    container.innerHTML = "<p>No products available.</p>";
+    return;
+  }
+
+  // ✅ Escape potentially unsafe characters
+  function escapeHTML(str) {
+    return String(str).replace(/[&<>"']/g, (m) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[m]));
+  }
+
+  visibleProducts.forEach((product) => {
+    const name = escapeHTML(product.name || "");
+    const price = escapeHTML(product.price || "");
+    const img = String(product.img || "");
+
+    // Create product card
+    const card = document.createElement("div");
+    card.classList.add("product-card");
+
+    card.innerHTML = `
+      <img src="${img}" alt="${name}" loading="lazy">
+      <div class="product-info">
+        <h4>${name}</h4>
+        <p class="price">${price}</p>
+      </div>
+    `;
+
+    // Click → redirect to product details page
+    card.addEventListener("click", () => {
+      window.location.href =
+        "product-details.html?name=" +
+        encodeURIComponent(product.name) +
+        "&price=" +
+        encodeURIComponent(product.price) +
+        "&img=" +
+        encodeURIComponent(product.img);
+    });
+    container.appendChild(card);
+  });
+
+  // ✅ Hide "Load More" when all products are shown
+  if (loadMoreBtn && limit >= safeProducts.length) {
+    loadMoreBtn.style.display = "none";
+  }
+}
+
+
+    loadMoreBtn.addEventListener("click", () => {
+      visibleCount += 4; // Show 4 more per click
+      renderProducts(visibleCount);
+    });
+
+    // Show products initially
+    renderProducts(visibleCount);
+
+    // ✅ Update Cart Count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const countEl = document.getElementById("cart-count");
+      if (countEl) countEl.textContent = cart.length;
+    }
+
+    
+  </script>
+  <script src="cart-utils.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart | Stackly Shopping</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+    html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: #111;
+  color: #fff;
+}
+
+/* Main content area should grow */
+.cart-section {
+  flex: 1;
+  padding: 20px;
+}
+
+    /* Simple styles for cart */
+    .cart-item { display: flex; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+    .cart-item img { width: 80px; margin-right: 15px; }
+    .cart-info { flex: 1; }
+    .cart-info h4 { margin: 0 0 5px; }
+    .cart-info p { margin: 0; }
+    .cart-actions { text-align: right; }
+    .cart-actions button { margin-left: 10px; }
+    .cart-footer { margin-top: 20px; text-align: right; }
+
+    .cart-summary {
+  background: #0f0f0f;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 20px auto;
+  max-width: 500px;
+  color: #fff;
+  text-align: center;
+}
+
+.cart-summary h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+#proceed-pay {
+  padding: 10px 20px;
+  background: #ffcc00;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#proceed-pay:hover {
+  background: #ffd633;
+}
+@media (max-width: 480px) {
+  .cart-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cart-item img {
+    margin-bottom: 10px;
+  }
+
+  .cart-summary {
+    width: 90%;
+  }
+}
+
+
+.cart-item h4,
+.cart-item p,
+.cart-item button {
+  color: #000000 ;
+}
+
+
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="logo">Stackly</a>
+
+    </div>
+    <div class="nav-center">
+     <div class="dropdown">
+    <a href="index.html" class="active">Home ▾</a>
+    <div class="dropdown-menu">
+      <a href="home2.html">Home 2</a>
+      
+    </div>
+  </div>
+
+  <a href="dashboard.html">Dashboard</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html">Login</a>
+      Cart (<span id="cart-count">0</span>)
+    </div>
+  </header>
+
+  <!-- Cart Section -->
+  <section class="cart-section">
+    <h1>Your Cart</h1>
+    <div id="cart-items"></div>
+    <div class="cart-footer">
+     
+  </section>
+
+    <!-- Cart Summary / Proceed to Pay -->
+<div class="cart-summary">
+  <h3>Cart Total: ₹<span id="cart-total">0</span></h3>
+  <button id="proceed-pay">Proceed to Pay</button>
+</div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
+
+  <!-- Cart Script -->
+  <script>
+    
+function loadCart() {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+
+  // ✅ Ensure cart is always an array
+  if (!Array.isArray(cart)) cart = [];
+
+  const container = document.getElementById("cart-items");
+  if (!container) return; // Prevent errors if element missing
+  container.innerHTML = "";
+
+  // ✅ Empty cart message
+  if (cart.length === 0) {
+    container.innerHTML = "<p>Your cart is empty.</p>";
+    return;
+  }
+
+  // ✅ Render each cart item safely
+  cart.forEach((product, index) => {
+    const card = document.createElement("div");
+    card.classList.add("cart-item");
+
+    // Escape unsafe content (basic sanitization)
+    const name = String(product.name || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const price = String(product.price || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const img = String(product.img || "");
+
+    card.innerHTML = `
+      <img src="${img}" alt="${name}" loading="lazy" />
+      <div class="cart-info">
+        <h4>${name}</h4>
+        <p>${price}</p>
+        <button aria-label="Remove ${name} from cart" class="remove-btn">Remove</button>
+      </div>
+    `;
+
+    // ✅ Add event listener for removal
+    card.querySelector(".remove-btn").addEventListener("click", () => {
+      removeFromCart(index);
+    });
+
+    container.appendChild(card);
+  });
+}
+
+
+function removeFromCart(index) {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  if (!Array.isArray(cart)) cart = [];
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  loadCart(); // re-render
+  updateCartCount(); // optional: update count in navbar
+}
+
+// Also update cart count in navbar
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const countEl = document.getElementById("cart-count");
+  if (countEl) countEl.textContent = cart.length;
+}
+
+function updateCartTotal() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let total = 0;
+
+  cart.forEach(item => {
+    // Remove ₹ and commas, convert to number
+    let priceNum = Number(item.price.replace(/₹|,/g, ""));
+    total += priceNum;
+  });
+
+  document.getElementById("cart-total").textContent = total.toLocaleString();
+}
+
+document.getElementById("proceed-pay").addEventListener("click", () => {
+  alert("Redirecting to payment gateway...\nTotal: ₹" + document.getElementById("cart-total").textContent);
+  // Here you can redirect to payment page
+  // window.location.href = "payment.html";
+});
+
+
+// Call it after rendering cart items
+updateCartTotal();
+
+
+// Initialize cart on page load
+loadCart();
+updateCartCount();
+</script>
+
+  
+</body>
+</html>
