@@ -12,9 +12,12 @@
 
   document.querySelectorAll('.dropdown-toggle').forEach((toggle) => {
   toggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    const dropdownMenu = toggle.nextElementSibling;
-    dropdownMenu.classList.toggle('show');
+     const isMobile = window.innerWidth <= 768; // adjust breakpoint if needed
+    if (isMobile) {
+      e.preventDefault(); // prevent navigating to Home
+      const dropdownMenu = toggle.nextElementSibling;
+      dropdownMenu.classList.toggle('show');
+    }
   });
 });
 
