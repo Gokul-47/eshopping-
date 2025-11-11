@@ -6,12 +6,28 @@
   <title>Stackly Shopping</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* ---------- SIGNUP PAGE STYLES ---------- */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #111;
+      color: #fff;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    main {
+      flex: 1;
+    }
+
     .signup-section {
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 70vh;
       background: linear-gradient(to right, #222, #111);
+      padding: 20px;
     }
 
     .signup-box {
@@ -77,31 +93,58 @@
     .signup-box a:hover {
       text-decoration: underline;
     }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: #0f0f0f;
+      color: #ccc;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+      .signup-box {
+        padding: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Navbar -->
   <header class="navbar">
-    <div class="nav-left">
-      <a href="index.html" class="logo">Stackly</a>
-
-    </div>
-    <div class="nav-center">
-      <div class="dropdown">
-    <a href="index.html" class="active">Home ▾</a>
-    <div class="dropdown-menu">
-      <a href="home2.html">Home 2</a>
-      
-    </div>
+  <div class="nav-left">
+    <a href="index.html" class="logo">
+      <img src="images/logoimg.webp" alt="Stackly Logo">
+      <span>Stackly</span>
+    </a>
   </div>
 
-  <a href="dashboard.html">Dashboard</a>
+  <!-- Hamburger icon -->
+  <div class="hamburger" id="hamburger">☰</div>
+
+  <div class="nav-center" id="nav-center">
+    <div class="dropdown">
+      <a href="index.html" class="active">Home ▾</a>
+      <div class="dropdown-menu">
+        <a href="home2.html">Home 2</a>
+      </div>
     </div>
-    <div class="nav-right">
-      <a href="login.html">Login</a>
-      <a href="cart.html">Cart</a>
-    </div>
-  </header>
+    <a href="about.html">About us</a>
+    <a href="service.html">Services</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </div>
+</header>
 
   <!-- Category Bar -->
   <nav class="category-bar">
@@ -113,26 +156,29 @@
     <a href="appliances.html">Appliances</a>
   </nav>
 
-  <!-- Sign Up Section -->
-  <section class="signup-section">
-    <div class="signup-box">
-      <h1>Create Your Account</h1>
-      <form id="signupForm">
-        <input type="text" id="username" placeholder="Enter Username" required />
-        <input type="email" id="email" placeholder="Enter Email" required />
-        <input type="password" id="password" placeholder="Enter Password" required />
-        <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
-        <button type="submit">Sign Up</button>
-      </form>
-      <p>Already have an account? <a href="login.html">Login</a></p>
-    </div>
-  </section>
+  <!-- Main Signup Section -->
+  <main>
+    <section class="signup-section">
+      <div class="signup-box">
+        <h1>Create Your Account</h1>
+        <form id="signupForm">
+          <input type="text" id="username" placeholder="Enter Username" required />
+          <input type="email" id="email" placeholder="Enter Email" required />
+          <input type="password" id="password" placeholder="Enter Password" required />
+          <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+          <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer>
     <p>© 2025 Stackly Shopping | All Rights Reserved</p>
   </footer>
 
+  <script src="script.js"></script>
   <script>
     const signupForm = document.getElementById("signupForm");
 
@@ -153,12 +199,13 @@
         return;
       }
 
+      // Store user data
       const users = JSON.parse(localStorage.getItem("users")) || [];
       users.push({ username, email, password });
       localStorage.setItem("users", JSON.stringify(users));
 
-      alert("✅ Sign Up Successful! You can now login.");
-      window.location.href = "login.html";
+      // Redirect to 404 page instead of popup
+      window.location.href = "404.html";
     });
   </script>
 </body>

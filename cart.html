@@ -94,27 +94,31 @@ body {
 <body>
   <!-- Navbar -->
   <header class="navbar">
-    <div class="nav-left">
-      <a href="index.html" class="logo">Stackly</a>
-
-    </div>
-    <div class="nav-center">
-     <div class="dropdown">
-    <a href="index.html" class="active">Home ▾</a>
-    <div class="dropdown-menu">
-      <a href="home2.html">Home 2</a>
-      
-    </div>
+  <div class="nav-left">
+    <a href="index.html" class="logo">
+      <img src="images/logoimg.webp" alt="Stackly Logo">
+      <span>Stackly</span>
+    </a>
   </div>
 
-  <a href="dashboard.html">Dashboard</a>
-    </div>
-    <div class="nav-right">
-      <a href="login.html">Login</a>
-      Cart (<span id="cart-count">0</span>)
-    </div>
-  </header>
+  <!-- Hamburger icon -->
+  <div class="hamburger" id="hamburger">☰</div>
 
+  <div class="nav-center" id="nav-center">
+    <div class="dropdown">
+      <a href="index.html" class="active">Home ▾</a>
+      <div class="dropdown-menu">
+        <a href="home2.html">Home 2</a>
+      </div>
+    </div>
+    <a href="about.html">About us</a>
+    <a href="service.html">Services</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </div>
+</header>
   <!-- Cart Section -->
   <section class="cart-section">
     <h1>Your Cart</h1>
@@ -134,6 +138,7 @@ body {
     <p>© 2025 Stackly Shopping | All Rights Reserved</p>
   </footer>
 
+  <script src="script.js"></script>
   <!-- Cart Script -->
   <script>
     

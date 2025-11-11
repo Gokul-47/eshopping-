@@ -3,59 +3,453 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stackly Shopping</title>
+  <title>Stackly Shopping - Home 2</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* =========================
+   GLOBAL STYLES
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #0b0b0b;
+  color: #fff;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0f0f0f;
+  padding: 15px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 8px;
+}
+
+/* Center Links */
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-center a {
+  color: #f5f5f5;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-center a:hover,
+.nav-center a.active {
+  color: #00bcd4;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background: #141414;
+  padding: 10px 0;
+  border-radius: 5px;
+  top: 100%;
+  left: 0;
+  min-width: 150px;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  color: #fff;
+}
+
+.dropdown-menu a:hover {
+  background: #00bcd4;
+  color: #0b0b0b;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-center {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 65px;
+    right: 0;
+    background: #0f0f0f;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .nav-center.show {
+    display: flex;
+  }
+
+  .nav-center a {
+    padding: 10px 0;
+    font-size: 1.1rem;
+  }
+}
+
+/* =========================
+   CATEGORY BAR
+========================= */
+.category-bar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: #141414;
+  padding: 1rem;
+  gap: 1.5rem;
+}
+
+.category-bar a {
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.category-bar a:hover {
+  color: #00bcd4;
+}
+
+/* =========================
+   PRODUCT SECTIONS
+========================= */
+.product-section {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: #0b0b0b;
+}
+
+.product-section h1 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #00bcd4;
+}
+
+.product-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+/* =========================
+   FEATURED COLLECTIONS
+========================= */
+.featured-collections {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(15, 15, 15, 0.4)),
+              url("images/banner1page2.avif") center/cover no-repeat;
+  padding: 4rem 2rem;
+  color: #fff;
+}
+
+
+.featured-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.featured-text {
+  flex: 1 1 400px;
+}
+
+.featured-text h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.featured-text p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: #ddd;
+}
+
+.featured-text .btn {
+  background: #ffcc00;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.featured-text .btn:hover {
+  background: #ffcc00;
+}
+
+.featured-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 15px;
+}
+
+@media (max-width: 900px) {
+  .featured-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .featured-image img {
+    max-width: 100%;
+  }
+}
+
+/* =========================
+   TESTIMONIALS
+========================= */
+.testimonials {
+  background: #0b0b0b;
+  color: #fff;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.testimonials h1 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #ffcc00;
+}
+
+.testimonials-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.testimonial-card {
+  background: #141414;
+  padding: 2rem;
+  border-radius: 12px;
+  flex: 1 1 280px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+}
+
+.testimonial-card p {
+  font-style: italic;
+  color: #ccc;
+}
+
+.testimonial-card h4 {
+  margin-top: 1rem;
+  color: #ffcc00;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+
+/* =========================
+   PRODUCT SECTIONS
+========================= */
+.product-section {
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: #0b0b0b;
+}
+
+.product-section h1 {
+  font-size: 1.8rem;
+  color: #ffcc00;
+  margin-bottom: 1.5rem;
+}
+
+/* Product grid container */
+.product-container {
+  display: grid;
+  gap: 20px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Product cards */
+.product-card {
+  background: #111;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  font-size: 1.1rem;
+  color: #fff;
+  margin: 8px 0;
+}
+
+.product-card p {
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+}
+
+/* ✅ RESPONSIVE FIX — 2 per row on small screens */
+@media (max-width: 768px) {
+  .product-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+/* ✅ 1 per row only for very small screens (phones <400px) */
+@media (max-width: 400px) {
+  .product-container {
+    grid-template-columns: 1fr;
+  }
+
+
+  @media (max-width: 480px) {
+  .product-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+
+/* ✅ Optional — adjust for tiny screens below 340px if text overflows */
+@media (max-width: 340px) {
+  .product-container {
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
+  }
+
+  .product-card h3 {
+    font-size: 0.85rem;
+  }
+
+  .product-card p {
+    font-size: 0.8rem;
+  }
+}
+
+
+
+}
+
+
+  </style>
 </head>
 <body>
   <!-- Navbar -->
   <header class="navbar">
-    <div class="nav-left">
-     <a href="index.html" class="logo">Stackly</a>
-
-    </div>
-    <div class="nav-center">
-
-  <div class="dropdown">
-    <a href="index.html" class="active">Home ▾</a>
-    <div class="dropdown-menu">
-      <a href="home2.html">Home 2</a>
-      
-    </div>
+  <div class="nav-left">
+    <a href="index.html" class="logo">
+      <img src="images/logoimg.webp" alt="Stackly Logo">
+      <span>Stackly</span>
+    </a>
   </div>
 
-  <a href="dashboard.html">Dashboard</a>
+  <!-- Hamburger icon -->
+  <div class="hamburger" id="hamburger">☰</div>
 
-</div>
-
-    <div class="nav-right">
-      <a href="login.html">Login</a>
-      <a href="cart.html" id="cart-link">Cart(<span id="cart-count">0</span>)</a>
-
+  <div class="nav-center" id="nav-center">
+    <div class="dropdown">
+      <a href="index.html" class="active">Home ▾</a>
+      <div class="dropdown-menu">
+        <a href="home2.html">Home 2</a>
+      </div>
     </div>
-  </header>
-    <!-- Hero Banner Slider -->
-  <section class="hero-slider">
-    <div class="slides">
-      <img src="images/banner1.webp" alt="Banner 1" class="slide active" />
-      <img src="images/banner2.webp" alt="Banner 2" class="slide" />
-      <img src="images/banner3.webp" alt="Banner 3" class="slide" />
+    <a href="about.html">About us</a>
+    <a href="service.html">Services</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </div>
+</header>
+
+  <!-- ====== Featured Collections Section ====== -->
+  <section class="featured-collections">
+    <div class="featured-content">
+      <div class="featured-text">
+        <h1>Discover Our Newest Collections</h1>
+        <p>Explore trending designs and innovative products that redefine shopping. 
+        Whether it's fashion, tech, or lifestyle, Stackly brings the best to your doorstep.</p>
+        <a href="men.html" class="btn">Shop Now</a>
+      </div>
+      
     </div>
   </section>
 
-  <!-- Category Row -->
-  <nav class="category-bar">
-    <a href="men.html">Men</a>
-    <a href="women.html">Women</a>
-    <a href="kids.html">Kids</a>
-    <a href="beauty.html">Beauty</a>
-    <a href="electronics.html">Electronics</a>
-    <a href="appliances.html">Appliances</a>
-  </nav>
-
-
-
-  <!-- Sections -->
-<section class="product-section">
+  <!-- ====== Product Highlights Section ====== -->
+ <section class="product-section">
     <h1>Seasonal Picks</h1>
     <div class="product-container" id="seasonal-picks"></div>
   </section>
@@ -77,23 +471,43 @@
   </section>
 
 
+  <!-- ====== Customer Testimonials Section ====== -->
+  <section class="testimonials">
+    <h1>What Our Shoppers Say</h1>
+    <div class="testimonials-container">
+      <div class="testimonial-card">
+        <p>“Stackly has changed the way I shop online. Smooth experience and amazing deals!”</p>
+        <h4>- Priya S.</h4>
+      </div>
+      <div class="testimonial-card">
+        <p>“Great quality products and super fast delivery. Love their interface!”</p>
+        <h4>- Rahul K.</h4>
+      </div>
+      <div class="testimonial-card">
+        <p>“I found everything I needed for my family in one place — perfect!”</p>
+        <h4>- Meena R.</h4>
+      </div>
+    </div>
+  </section>
 
-  <!-- Footer Top -->
-<footer class="footer-top">
+  <!-- ====== Footer Top ====== -->
+  <footer class="footer-top">
   <div class="footer-col">
     <h3>Stackly Shopping</h3>
-    <p>Your modern shopping destination. We provide the best quality fashion,
-      electronics and daily needs — at fair prices.</p>
+    <p>
+      Your modern shopping destination. We provide the best quality fashion,
+      electronics and daily needs — at fair prices.
+    </p>
   </div>
 
   <div class="footer-col">
     <h4>Quick Links</h4>
     <ul>
-      <li><a href="men.html">Men</a></li>
-      <li><a href="women.html">Women</a></li>
-      <li><a href="electronics.html">Electronics</a></li>
-      <li><a href="beauty.html">Beauty</a></li>
-      <li><a href="appliances.html">Appliances</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="service.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
     </ul>
   </div>
 
@@ -108,29 +522,18 @@
   </div>
 </footer>
 
-<!-- Bottom Footer (Keep Original) -->
-<footer class="footer-bottom">
-  <p>© 2025 Stackly Shopping | All Rights Reserved</p>
-</footer>
 
-
+  <!-- Bottom Footer -->
+  <footer class="footer-bottom">
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
 
   <script src="script.js"></script>
-  <script>
-    loadHomeProducts(); // initialize sections on home
-    startBannerSlider(); // start auto banner slideshow
-
-    function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const count = cart.length;
-    const countEl = document.getElementById("cart-count");
-    if (countEl) countEl.textContent = count;
-  }
-
-  // Update when page loads
- 
-  </script>
   <script src="cart-utils.js"></script>
-
+  <script>
+    // Initialize products
+    
+    updateCartCount();
+  </script>
 </body>
 </html>

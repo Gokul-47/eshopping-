@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Stackly Shopping</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* =========================
+   CONTACT PAGE
+========================= */
+.contact-hero {
+  text-align: center;
+  background: url('images/contact-bg.jpg') center/cover no-repeat;
+  color: #fff;
+  padding: 6rem 1rem 4rem;
+  background-color: #111;
+}
+
+.contact-hero h1 {
+  font-size: 2.5rem;
+  color: #ffcc00;
+  margin-bottom: 1rem;
+}
+
+.contact-hero p {
+  color: #ddd;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-section {
+  padding: 4rem 2rem;
+  background-color: #0f0f0f;
+  color: #fff;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contact-info, .contact-form {
+  flex: 1 1 350px;
+  background: #151515;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.contact-info h2,
+.contact-form h2 {
+  color: #ffcc00;
+  margin-bottom: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 6px;
+  background: #222;
+  color: #fff;
+}
+
+.contact-form button {
+  background: #ffcc00;
+  border: none;
+  color: #000;
+  padding: 12px 20px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+  background: #ffd633;
+}
+
+/* Responsive Contact */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+  }
+
+  .contact-info, .contact-form {
+    width: 100%;
+  }
+}
+@media (max-width:320px) {
+  .contact-info{
+   margin: 0;
+   display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+  <div class="nav-left">
+    <a href="index.html" class="logo">
+      <img src="images/logoimg.webp" alt="Stackly Logo">
+      <span>Stackly</span>
+    </a>
+  </div>
+
+  <!-- Hamburger icon -->
+  <div class="hamburger" id="hamburger">☰</div>
+
+  <div class="nav-center" id="nav-center">
+    <div class="dropdown">
+      <a href="index.html" class="active">Home ▾</a>
+      <div class="dropdown-menu">
+        <a href="home2.html">Home 2</a>
+      </div>
+    </div>
+    <a href="about.html">About us</a>
+    <a href="service.html">Services</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </div>
+</header>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-hero">
+    <h1>Get in Touch</h1>
+    <p>We’d love to hear from you! Whether you have a question or feedback, feel free to reach out.</p>
+  </section>
+
+  <section class="contact-section">
+    <div class="contact-container">
+      <!-- Left: Contact Info -->
+      <div class="contact-info">
+        <h2>Contact Information</h2>
+        <p><strong>Email:</strong> support@stacklyshop.com</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Address:</strong> 12, Tech Park Street, Chennai, India</p>
+        <div class="social-icons">
+          <a href="404.html"><img src="icons/facebook.svg" alt="Facebook"></a>
+          <a href="404.html"><img src="icons/instagram.svg" alt="Instagram"></a>
+          <a href="404.html"><img src="icons/twitter.svg" alt="Twitter"></a>
+        </div>
+      </div>
+
+      <!-- Right: Contact Form -->
+      <div class="contact-form">
+        <h2>Send Us a Message</h2>
+        <form id="contactForm" onsubmit="return handleContact(event)">
+          <input type="text" id="name" placeholder="Your Name" required />
+          <input type="email" id="email" placeholder="Your Email" required />
+          <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+        <p id="form-status"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-top">
+    <div class="footer-col">
+      <h3>Stackly Shopping</h3>
+      <p>Your modern shopping destination. We provide the best quality fashion,
+        electronics and daily needs — at fair prices.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="men.html">Men</a></li>
+        <li><a href="women.html">Women</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="404.html"><img src="icons/facebook.svg" alt="Facebook"></a>
+        <a href="404.html"><img src="icons/instagram.svg" alt="Instagram"></a>
+        <a href="404.html"><img src="icons/twitter.svg" alt="Twitter"></a>
+      </div>
+    </div>
+  </footer>
+
+  <footer class="footer-bottom">
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function handleContact(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const status = document.getElementById("form-status");
+
+      if (name && email && message) {
+        status.textContent = "✅ Thank you, " + name + "! Your message has been sent.";
+        status.style.color = "#00ff66";
+        e.target.reset();
+      } else {
+        status.textContent = "❌ Please fill all fields.";
+        status.style.color = "#ff3333";
+      }
+    }
+  </script>
+</body>
+</html>

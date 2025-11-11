@@ -1,6 +1,25 @@
 // =========================
 // HERO BANNER SLIDER
 // =========================
+
+ const hamburger = document.getElementById("hamburger");
+  const navCenter = document.getElementById("nav-center");
+
+  hamburger.addEventListener("click", () => {
+    navCenter.classList.toggle("show");
+    hamburger.textContent = navCenter.classList.contains("show") ? "✖" : "☰";
+  });
+
+  document.querySelectorAll('.dropdown-toggle').forEach((toggle) => {
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    const dropdownMenu = toggle.nextElementSibling;
+    dropdownMenu.classList.toggle('show');
+  });
+});
+
+
+  
 let currentSlide = 0;
 const slides = document.querySelectorAll(".slide");
 

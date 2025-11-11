@@ -6,111 +6,125 @@
   <title>Stackly Shopping</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    body {
-      background-color: #0b0b0b;
-      color: #fff;
-      font-family: Roboto, Arial, sans-serif;
-    }
+    
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    background-color: #0b0b0b;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .dashboard-container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-    }
+  .dashboard-container {
+    flex: 1; /* push footer down */
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+  }
 
-    h1 {
-      color: #ffcc00;
-      text-align: center;
-      margin-bottom: 40px;
-      letter-spacing: 1px;
-    }
+  h1 {
+    color: #ffcc00;
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+  }
 
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      margin-bottom: 40px;
-    }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
 
-    .stat-card {
-      flex: 1 1 200px;
-      background: #0f0f0f;
-      padding: 20px;
-      border-radius: 16px;
-      text-align: center;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
-    }
+  .stat-card {
+    flex: 1 1 200px;
+    background: #0f0f0f;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  }
 
-    .stat-card h2 {
-      color: #ffcc00;
-      margin-bottom: 10px;
-    }
+  .stat-card h2 {
+    color: #ffcc00;
+    margin-bottom: 10px;
+  }
 
-    .stat-card p {
-      font-size: 18px;
-      color: #ccc;
-    }
+  .stat-card p {
+    font-size: 18px;
+    color: #ccc;
+  }
 
-    .recent-products {
-      margin-top: 30px;
-    }
+  .recent-products {
+    margin-top: 30px;
+  }
 
-    .recent-products h3 {
-      color: #ffcc00;
-      margin-bottom: 15px;
-    }
+  .recent-products h3 {
+    color: #ffcc00;
+    margin-bottom: 15px;
+  }
 
-    .recent-products table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+  .recent-products table {
+    width: 100%;
+    border-collapse: collapse;
+  }
 
-    .recent-products th,
-    .recent-products td {
-      padding: 12px;
-      border-bottom: 1px solid #222;
-      text-align: left;
-      color: #fff;
-    }
+  .recent-products th,
+  .recent-products td {
+    padding: 12px;
+    border-bottom: 1px solid #222;
+    text-align: left;
+    color: #fff;
+  }
 
-    .recent-products th {
-      color: #ffcc00;
-    }
+  .recent-products th {
+    color: #ffcc00;
+  }
 
-    footer {
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
-      background: #0f0f0f;
-      color: #ccc;
-      border-top: 1px solid #222;
-    }
-  </style>
+  footer {
+    text-align: center;
+    padding: 15px;
+    background: #0f0f0f;
+    color: #ccc;
+    border-top: 1px solid #222;
+    width: 100%;
+    margin-top: auto; /* ensures footer stays at bottom */
+  }
+</style>
+
+  
 </head>
 <body>
   <!-- Navbar -->
-  <header class="navbar">
-    <div class="nav-left">
-     <a href="index.html" class="logo">Stackly</a>
-
-    </div>
-    <div class="nav-center">
-     <div class="dropdown">
-    <a href="index.html" class="active">Home ▾</a>
-    <div class="dropdown-menu">
-      <a href="home2.html">Home 2</a>
-      
-    </div>
+ <header class="navbar">
+  <div class="nav-left">
+    <a href="index.html" class="logo">
+      <img src="images/logoimg.webp" alt="Stackly Logo">
+      <span>Stackly</span>
+    </a>
   </div>
 
-  <a href="dashboard.html">Dashboard</a>
+  <!-- Hamburger icon -->
+  <div class="hamburger" id="hamburger">☰</div>
+
+  <div class="nav-center" id="nav-center">
+    <div class="dropdown">
+      <a href="index.html" class="active">Home ▾</a>
+      <div class="dropdown-menu">
+        <a href="home2.html">Home 2</a>
+      </div>
     </div>
-    <div class="nav-right">
-      <a href="login.html">Login</a>
-      <a href="cart.html">Cart(<span id="cart-count">0</span>)</a>
-    </div>
-  </header>
+    <a href="about.html">About us</a>
+    <a href="service.html">Services</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </div>
+</header>
 
   <!-- Dashboard -->
   <div class="dashboard-container">
@@ -154,7 +168,7 @@
   <footer>
     <p>© 2025 Stackly Shopping | All Rights Reserved</p>
   </footer>
-
+  <script src="script.js"></script>
   <script>
     // Update cart count in navbar
     function updateCartCount() {

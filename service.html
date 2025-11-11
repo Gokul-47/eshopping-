@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackly Shopping</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #0b0b0b;
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Hero Section */
+    .services-hero {
+      background: 
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url("images/services-bg.jpg") center/cover no-repeat;
+      text-align: center;
+      padding: 6rem 2rem;
+      color: #fff;
+    }
+
+    .services-hero h1 {
+      font-size: 2.8rem;
+      color: #ffcc00;
+      margin-bottom: 1rem;
+    }
+
+    .services-hero p {
+      font-size: 1.1rem;
+      color: #ccc;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Services Container */
+    .services-container {
+      flex: 1;
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: #111;
+      padding: 2rem;
+      border-radius: 16px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .service-card img {
+      height: 80px;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h2 {
+      color: #ffcc00;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card p {
+      color: #ccc;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: #111;
+      margin-top: 3rem;
+    }
+
+    .cta-section h2 {
+      color: #ffcc00;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      color: #ccc;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-section a {
+      background: #ffcc00;
+      color: #000;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .cta-section a:hover {
+      background: #ffd633;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #0f0f0f;
+      color: #ccc;
+      border-top: 1px solid #222;
+      margin-top: auto;
+    }
+
+
+    /* =========================
+   SERVICES SECTION
+========================= */
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  padding: 4rem 2rem;
+  background: linear-gradient(to right, #0b0b0b, #111);
+  text-align: center;
+  color: #fff;
+}
+
+.service-card {
+  background: #141414;
+  border-radius: 16px;
+  padding: 2.5rem 1.8rem;
+  width: 320px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 25px rgba(0, 188, 212, 0.25);
+}
+
+.service-card img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 1rem;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.service-card:hover img {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.service-card h2 {
+  color: #ffcc00;
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.service-card p {
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* ✅ Section heading (if you add one later) */
+.services-container h1 {
+  width: 100%;
+  text-align: center;
+  color: #ffcc00;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 900px) {
+  .service-card {
+    width: 260px;
+  }
+}
+
+@media (max-width: 600px) {
+  .services-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+  }
+
+  .service-card {
+    width: 90%;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+<header class="navbar">
+  <div class="nav-left">
+    <a href="index.html" class="logo">
+      <img src="images/logoimg.webp" alt="Stackly Logo">
+      <span>Stackly</span>
+    </a>
+  </div>
+
+  <!-- Hamburger icon -->
+  <div class="hamburger" id="hamburger">☰</div>
+
+  <div class="nav-center" id="nav-center">
+    <div class="dropdown">
+      <a href="index.html" class="active">Home ▾</a>
+      <div class="dropdown-menu">
+        <a href="home2.html">Home 2</a>
+      </div>
+    </div>
+    <a href="about.html">About us</a>
+    <a href="service.html">Services</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </div>
+</header>
+
+
+  <!-- Hero Section -->
+  <section class="services-hero">
+    <h1>Our Services</h1>
+    <p>At Stackly Shopping, we believe in providing an unmatched shopping experience — combining quality, convenience, and customer satisfaction.</p>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-container">
+    <div class="service-card">
+     
+      <h2>Fast Delivery</h2>
+      <p>Get your favorite products delivered to your doorstep quickly and safely with our trusted delivery partners.</p>
+    </div>
+
+    <div class="service-card">
+      
+      <h2>24/7 Support</h2>
+      <p>Our dedicated customer support team is always ready to help you with any queries, day or night.</p>
+    </div>
+
+    <div class="service-card">
+      <h2>Quality Assurance</h2>
+      <p>We ensure that every product listed on our platform meets our strict quality standards before reaching you.</p>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>Join Stackly Family Today!</h2>
+    <p>Shop smarter, faster, and better with Stackly Shopping. Start exploring our exclusive collections now.</p>
+    <a href="signup.html">Get Started</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+  </footer>
+  <script src="script.js"></script>
+
+  
+</body>
+</html>
