@@ -6,13 +6,14 @@
   <title>Stackly Shopping</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* ===================== PRODUCT DETAILS ===================== */
     .details-section {
       display: flex;
       justify-content: center;
       align-items: flex-start;
       min-height: 70vh;
       padding: 2rem;
-      background: #111;
+      background: #fdfdfd;
       color: #fff;
     }
 
@@ -21,111 +22,132 @@
       gap: 2rem;
       max-width: 900px;
       width: 100%;
-      background: #0f0f0f;
+      background: #F5F5F5;
       border-radius: 12px;
       padding: 1.5rem;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+      align-items: stretch; /* ensures children stretch vertically */
     }
 
     .details-image img {
       max-width: 300px;
+      width: 100%;
       border-radius: 12px;
+      object-fit: contain;
+    }
+
+    .details-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1; /* takes remaining space */
     }
 
     .details-info h1 {
       margin-bottom: 1rem;
-      color: #ffcc00;
+      color: #000000;
     }
 
     .details-info .price {
       font-size: 1.5rem;
       margin: 0.5rem 0 1rem;
-      color: #fff;
+      color: #000000;
+    }
+
+    .details-info p {
+      flex: 1;
+      color:#000000; /* description takes remaining vertical space */
     }
 
     .btn-add {
-      padding: 12px 20px;
+      padding: 12px 10px;
       background: #ffcc00;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
       transition: 0.3s;
+      margin-top: 1rem; /* spacing above button */
+      width:200px;
+      align-items: center;
     }
 
     .btn-add:hover {
       background: #ffd633;
     }
 
-    /* ================= MOBILE PRODUCT DETAILS FIX (320px – 480px) ================= */
-@media (max-width: 480px) {
+    /* ================= MOBILE FIXES ================= */
+    @media (max-width: 768px) {
+      .details-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
 
-  .details-section {
-    padding: 1rem;
-  }
+      .details-info p {
+        flex: unset; /* reset flex for stacked layout */
+      }
 
-  .details-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1.2rem;
-    gap: 1.5rem;
-  }
+      .btn-add {
+        width: 100%;
+      }
+    }
 
-  .details-image img {
-    max-width: 220px;
-    width: 100%;
-  }
+    @media (max-width: 480px) {
+      .details-section {
+        padding: 1rem;
+      }
 
-  .details-info h2 {
-    font-size: 1.3rem;
-  }
+      .details-image img {
+        max-width: 220px;
+      }
 
-  .details-info .price {
-    font-size: 1.2rem;
-  }
+      .details-info h1 {
+        font-size: 1.3rem;
+      }
 
-  .btn-add {
-    
-    width: 100%;
-    padding: 14px;
-    font-size: 1rem;
-  }
+      .details-info .price {
+        font-size: 1.2rem;
+      }
 
-  /* Navbar mobile spacing (matches home fix) */
-  
-}
+      .btn-add {
+        padding: 14px;
+        font-size: 1rem;
+      }
+    }
 
+    @media (max-width: 360px) {
+      .details-image img {
+        max-width: 180px;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Navbar -->
   <header class="navbar">
-  <div class="nav-left">
-    <a href="index.html" class="logo">
-      <img src="images/logoimg.webp" alt="Stackly Logo">
-      <span>Stackly</span>
-    </a>
-  </div>
-
-  <!-- Hamburger icon -->
-  <div class="hamburger" id="hamburger">☰</div>
-
-  <div class="nav-center" id="nav-center">
-    <div class="dropdown">
-      <a href="index.html">Home ▾</a>
-      <div class="dropdown-menu">
-        <a href="home2.html">Home 2</a>
-      </div>
+    <div class="nav-left">
+      <a href="index.html" class="logo">
+        <img src="images/logoimg.webp" alt="Stackly Logo">
+        <span>Stackly</span>
+      </a>
     </div>
-    <a href="about.html">About us</a>
-    <a href="service.html">Services</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="contact.html">Contact</a>
-    <a href="login.html">Login</a>
-    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-  </div>
-</header>
+    <div class="hamburger" id="hamburger">☰</div>
+    <div class="nav-center" id="nav-center">
+      <div class="dropdown">
+        <a href="index.html">Home ▾</a>
+        <div class="dropdown-menu">
+          <a href="home2.html">Home 2</a>
+        </div>
+      </div>
+      <a href="about.html">About us</a>
+      <a href="service.html">Services</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </div>
+  </header>
+
   <!-- Product Details Section -->
   <section class="details-section">
     <div class="details-container">
@@ -136,19 +158,45 @@
         <h1 id="details-name">Product Name</h1>
         <p id="details-price" class="price">₹0</p>
         <p id="details-desc">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          fringilla eros sit amet velit gravida, non vehicula lacus suscipit.
+          This product is designed for everyday use and practical purposes. It is reliable, functional, and suitable for a wide range of users.
         </p>
-        <button id="add-to-cart" class="btn-add">Add to Cart </button>
+        <button id="add-to-cart" class="btn-add">Add to Cart</button>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
+  <footer class="footer-top">
+    <div class="footer-col">
+      <h3>Stackly Shopping</h3>
+      <p>Your modern shopping destination. We provide the best quality fashion, electronics and daily needs — at fair prices.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="404.html"><img src="icons/facebook.svg" alt="Facebook"></a>
+        <a href="404.html"><img src="icons/instagram.svg" alt="Instagram"></a>
+        <a href="404.html"><img src="icons/twitter.svg" alt="Twitter"></a>
+        <a href="404.html"><img src="icons/youtube.svg" alt="YouTube"></a>
+      </div>
+    </div>
+  </footer>
   <footer>
     <p>© 2025 Stackly Shopping | All Rights Reserved</p>
   </footer>
+
   <script src="script.js"></script>
+
   <!-- Global Cart Utility -->
   <script>
     function addToCart(product) {
@@ -164,7 +212,6 @@
       if (countEl) countEl.textContent = cart.length;
     }
 
-    // Update cart count on page load
     updateCartCount();
   </script>
 
@@ -185,7 +232,7 @@
       const product = { name, price, img };
       addToCart(product);
       updateCartCount();
-      
+     
     });
   </script>
 </body>

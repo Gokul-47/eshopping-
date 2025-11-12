@@ -15,25 +15,25 @@
       align-items: center;
       text-align: center;
       padding: 40px;
-      background: #0b0b0b;
-      color: #fff;
+      background: #ffffff;
+      color: #000000;
     }
 
     .error-page h1 {
       font-size: 6rem;
       font-weight: 700;
-      color: #00bcd4;
+      color: #FFCC00;
       margin-bottom: 15px;
     }
 
     .error-page p {
       font-size: 1.2rem;
       margin-bottom: 25px;
-      color: #ccc;
+      color: #000000;
     }
 
     .error-btn {
-      background: #00bcd4;
+      background: #FFCC00;
       color: #000;
       padding: 12px 25px;
       border-radius: 8px;
@@ -51,7 +51,7 @@
 <body>
 
   <!-- Navbar -->
-  <header class="navbar">
+   <header class="navbar">
   <div class="nav-left">
     <a href="index.html" class="logo">
       <img src="images/logoimg.webp" alt="Stackly Logo">
@@ -69,7 +69,10 @@
         <a href="home2.html">Home 2</a>
       </div>
     </div>
+    <a href="about.html">About us</a>
+    <a href="service.html">Services</a>
     <a href="dashboard.html">Dashboard</a>
+    <a href="contact.html">Contact</a>
     <a href="login.html">Login</a>
     <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
   </div>
@@ -81,9 +84,39 @@
     <p>Oops! The page you're looking for doesn't exist or has moved.</p>
     <a class="error-btn" href="index.html">Go Back Home</a>
   </section>
+  <footer class="footer-top">
+  <div class="footer-col">
+    <h3>Stackly Shopping</h3>
+    <p>
+      Your modern shopping destination. We provide the best quality fashion,
+      electronics and daily needs — at fair prices.
+    </p>
+  </div>
 
-  <footer>
+  <div class="footer-col">
+    <h4>Quick Links</h4>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="service.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-col">
+    <h4>Follow Us</h4>
+    <div class="social-icons">
+      <a href="404.html"><img src="icons/facebook.svg" alt="Facebook"></a>
+      <a href="404.html"><img src="icons/instagram.svg" alt="Instagram"></a>
+      <a href="404.html"><img src="icons/twitter.svg" alt="Twitter"></a>
+      <a href="404.html"><img src="icons/youtube.svg" alt="YouTube"></a>
+    </div>
+  </div>
+</footer>
+  <footer class="footer-bottom">
     <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+    <p>Contact us: <a href="mailto:info@yourcompany">info@yourcompany</a></p>
   </footer>
   <script src="script.js"></script>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stackly Shopping - Home 2</title>
+  <title>Stackly Shopping -</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     /* =========================
@@ -17,8 +17,8 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #0b0b0b;
-  color: #fff;
+  background-color: #ffffff;
+  color: #222;
   line-height: 1.6;
 }
 
@@ -31,9 +31,7 @@ h1, h2, h3, h4, h5 {
   font-weight: 600;
 }
 
-/* =========================
-   NAVBAR
-========================= */
+
 
 /* =========================
    CATEGORY BAR
@@ -42,19 +40,20 @@ h1, h2, h3, h4, h5 {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  background: #141414;
+  background: #f7f7f7 ;
   padding: 1rem;
   gap: 1.5rem;
 }
 
 .category-bar a {
-  color: #fff;
+  color: #222;
   font-weight: 500;
   transition: 0.3s;
 }
 
 .category-bar a:hover {
-  color: #00bcd4;
+  background: #ffecd1;
+  color: #222;
 }
 
 /* =========================
@@ -63,13 +62,13 @@ h1, h2, h3, h4, h5 {
 .product-section {
   padding: 3rem 2rem;
   text-align: center;
-  background: #0b0b0b;
+  background: #ffffff;
 }
 
 .product-section h1 {
   margin-bottom: 2rem;
   font-size: 2rem;
-  color: #00bcd4;
+  color: #ff6f00;
 }
 
 .product-container {
@@ -86,7 +85,7 @@ h1, h2, h3, h4, h5 {
   background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(15, 15, 15, 0.4)),
               url("images/banner1page2.avif") center/cover no-repeat;
   padding: 4rem 2rem;
-  color: #fff;
+  color: #222;
 }
 
 
@@ -102,11 +101,13 @@ h1, h2, h3, h4, h5 {
 
 .featured-text {
   flex: 1 1 400px;
+  
 }
 
 .featured-text h1 {
   font-size: 2.2rem;
   margin-bottom: 1rem;
+  color: #FFCC00;
 }
 
 .featured-text p {
@@ -150,7 +151,7 @@ h1, h2, h3, h4, h5 {
    TESTIMONIALS
 ========================= */
 .testimonials {
-  background: #0b0b0b;
+  background: #ffffff;
   color: #fff;
   padding: 4rem 2rem;
   text-align: center;
@@ -159,7 +160,7 @@ h1, h2, h3, h4, h5 {
 .testimonials h1 {
   margin-bottom: 2rem;
   font-size: 2rem;
-  color: #ffcc00;
+  color: #222;
 }
 
 .testimonials-container {
@@ -172,7 +173,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .testimonial-card {
-  background: #141414;
+  background: #F5F5F5;
   padding: 2rem;
   border-radius: 12px;
   flex: 1 1 280px;
@@ -186,12 +187,12 @@ h1, h2, h3, h4, h5 {
 
 .testimonial-card p {
   font-style: italic;
-  color: #ccc;
+  color: #222;
 }
 
 .testimonial-card h4 {
   margin-top: 1rem;
-  color: #ffcc00;
+  color: #222;
 }
 
 /* =========================
@@ -205,12 +206,12 @@ h1, h2, h3, h4, h5 {
 .product-section {
   padding: 3rem 2rem;
   text-align: center;
-  background-color: #0b0b0b;
+  background-color: #ffffff;
 }
 
 .product-section h1 {
   font-size: 1.8rem;
-  color: #ffcc00;
+  color: #222;
   margin-bottom: 1.5rem;
 }
 
@@ -224,7 +225,7 @@ h1, h2, h3, h4, h5 {
 
 /* Product cards */
 .product-card {
-  background: #111;
+  background: #F5F5F5;
   border-radius: 16px;
   padding: 1rem;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
@@ -239,12 +240,12 @@ h1, h2, h3, h4, h5 {
 
 .product-card h3 {
   font-size: 1.1rem;
-  color: #fff;
+  color: #222;
   margin: 8px 0;
 }
 
 .product-card p {
-  color: #ccc;
+  color: #555;
   font-size: 0.95rem;
 }
 
@@ -326,6 +327,7 @@ h1, h2, h3, h4, h5 {
   </div>
 </header>
 
+
   <!-- ====== Featured Collections Section ====== -->
   <section class="featured-collections">
     <div class="featured-content">
@@ -338,6 +340,14 @@ h1, h2, h3, h4, h5 {
       
     </div>
   </section>
+   <nav class="category-bar">
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="beauty.html">Beauty</a>
+    <a href="electronics.html">Electronics</a>
+    <a href="appliances.html">Appliances</a>
+  </nav>
 
   <!-- ====== Product Highlights Section ====== -->
  <section class="product-section">
@@ -417,6 +427,7 @@ h1, h2, h3, h4, h5 {
   <!-- Bottom Footer -->
   <footer class="footer-bottom">
     <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+    <p>Contact us: <a href="mailto:info@yourcompany">info@yourcompany</a></p>
   </footer>
 
   <script src="script.js"></script>

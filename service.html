@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      background: #0b0b0b;
-      color: #fff;
+      background: #ffffff;
+      color: #222;
       font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
@@ -19,9 +19,8 @@
 
     /* Hero Section */
     .services-hero {
-      background: 
-        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url("images/services-bg.jpg") center/cover no-repeat;
+     
+       background: url('images/service.webp') center/cover no-repeat;
       text-align: center;
       padding: 6rem 2rem;
       color: #fff;
@@ -29,13 +28,13 @@
 
     .services-hero h1 {
       font-size: 2.8rem;
-      color: #ffcc00;
+      color: #000000;
       margin-bottom: 1rem;
     }
 
     .services-hero p {
       font-size: 1.1rem;
-      color: #ccc;
+      color: #000000;
       max-width: 700px;
       margin: 0 auto;
     }
@@ -85,17 +84,17 @@
     .cta-section {
       text-align: center;
       padding: 3rem 2rem;
-      background: #111;
+      background: #ffffff;
       margin-top: 3rem;
     }
 
     .cta-section h2 {
-      color: #ffcc00;
+      color: #000000;
       margin-bottom: 1rem;
     }
 
     .cta-section p {
-      color: #ccc;
+      color: #000000;
       margin-bottom: 1.5rem;
     }
 
@@ -116,9 +115,9 @@
     footer {
       text-align: center;
       padding: 15px;
-      background: #0f0f0f;
-      color: #ccc;
-      border-top: 1px solid #222;
+      background: #ffffff;
+      color: #000000;
+      
       margin-top: auto;
     }
 
@@ -133,17 +132,17 @@
   align-items: stretch;
   gap: 2rem;
   padding: 4rem 2rem;
-  background: linear-gradient(to right, #0b0b0b, #111);
+  background:#ffffff;
   text-align: center;
   color: #fff;
 }
 
 .service-card {
-  background: #141414;
+  background: #F5F5F5;
   border-radius: 16px;
   padding: 2.5rem 1.8rem;
   width: 320px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -167,14 +166,14 @@
 }
 
 .service-card h2 {
-  color: #ffcc00;
+  color: #000000;
   font-size: 1.4rem;
   margin-bottom: 0.8rem;
   letter-spacing: 0.5px;
 }
 
 .service-card p {
-  color: #ccc;
+  color: #000000;
   font-size: 0.95rem;
   line-height: 1.6;
   max-width: 280px;
@@ -275,8 +274,39 @@
   </section>
 
   <!-- Footer -->
-  <footer>
+   <footer class="footer-top">
+  <div class="footer-col">
+    <h3>Stackly Shopping</h3>
+    <p>
+      Your modern shopping destination. We provide the best quality fashion,
+      electronics and daily needs — at fair prices.
+    </p>
+  </div>
+
+  <div class="footer-col">
+    <h4>Quick Links</h4>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="service.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-col">
+    <h4>Follow Us</h4>
+    <div class="social-icons">
+      <a href="404.html"><img src="icons/facebook.svg" alt="Facebook"></a>
+      <a href="404.html"><img src="icons/instagram.svg" alt="Instagram"></a>
+      <a href="404.html"><img src="icons/twitter.svg" alt="Twitter"></a>
+      <a href="404.html"><img src="icons/youtube.svg" alt="YouTube"></a>
+    </div>
+  </div>
+</footer>
+  <footer class="footer-bottom">
     <p>© 2025 Stackly Shopping | All Rights Reserved</p>
+    <p>Contact us: <a href="mailto:info@yourcompany">info@yourcompany</a></p>
   </footer>
   <script src="script.js"></script>
 
