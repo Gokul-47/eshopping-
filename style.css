@@ -364,8 +364,10 @@ footer {
     padding: 20px;
   }
 }
-.footer-col{
-  text-align: center;
+@media(min-width: 320px) and (max-width: 768px) {
+  .footer-col{
+    text-align: center;
+  }
 }
 
 .btn-load {
