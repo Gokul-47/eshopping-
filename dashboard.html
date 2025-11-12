@@ -95,8 +95,73 @@
     margin-top: auto; /* ensures footer stays at bottom */
  
     }
+
+    /* xtra */
+    /* === NEW DASHBOARD ADDITIONS === */
+.monthly-sales {
+  background: #fafafa;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  margin: 40px 0;
+  text-align: center;
+}
+
+.monthly-sales h3 {
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.monthly-sales p {
+  font-size: 22px;
+  font-weight: bold;
+  color: #0077cc;
+}
+
+/* Graphs Layout */
+.graphs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.graph-card {
+  flex: 1 1 500px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.graph-card h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+canvas {
+  width: 100% !important;
+  height: 300px !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .graphs {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .monthly-sales p {
+    font-size: 18px;
+  }
+}
+
    
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
   
 </head>
@@ -147,6 +212,25 @@
         <h2 id="total-products">0</h2>
         <p>Total Products Loaded</p>
       </div>
+      <!-- Monthly Sales Summary -->
+<div class="monthly-sales">
+  <h3>Total Sales This Month</h3>
+  <p id="monthly-sales">₹0</p>
+</div>
+
+<!-- Graphs Section -->
+<div class="graphs">
+  <div class="graph-card">
+    <h3>Category-wise Sales</h3>
+    <canvas id="categoryChart"></canvas>
+  </div>
+
+  <div class="graph-card">
+    <h3>Yearly Sales Growth</h3>
+    <canvas id="yearlyChart"></canvas>
+  </div>
+</div>
+
     </div>
 
     <!-- Recent Products Table -->
@@ -262,6 +346,69 @@
     // Initialize
     updateCartCount();
     loadDashboard();
+
+
+    // ==== ADD NEW SALES DASHBOARD SECTION ====
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Demo sales data (you can later connect with your real data)
+  const salesData = {
+    categories: ["Men", "Women", "Kids", "Beauty", "Electronics", "Appliances"],
+    values: [12000, 15000, 8000, 5000, 17000, 9000],
+    yearly: [40000, 60000, 80000, 100000, 150000, 180000, 210000, 230000, 250000, 280000, 300000, 320000],
+  };
+
+  // Monthly Sales total
+  const monthlySales = salesData.values.reduce((a, b) => a + b, 0);
+  const monthlySalesEl = document.getElementById("monthly-sales");
+  if (monthlySalesEl) {
+    monthlySalesEl.textContent = "₹" + monthlySales.toLocaleString();
+  }
+
+  // Category-wise Sales Chart
+  const categoryCtx = document.getElementById("categoryChart");
+  if (categoryCtx) {
+    new Chart(categoryCtx, {
+      type: "bar",
+      data: {
+        labels: salesData.categories,
+        datasets: [{
+          label: "Sales (₹)",
+          data: salesData.values,
+          backgroundColor: "#0077cc",
+        }],
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true } },
+      },
+    });
+  }
+
+  // Yearly Sales Growth Chart
+  const yearlyCtx = document.getElementById("yearlyChart");
+  if (yearlyCtx) {
+    new Chart(yearlyCtx, {
+      type: "line",
+      data: {
+        labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+        datasets: [{
+          label: "Yearly Sales (₹)",
+          data: salesData.yearly,
+          borderColor: "#4A90E2",
+          backgroundColor: "rgba(74,144,226,0.1)",
+          fill: true,
+          tension: 0.3,
+        }],
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true } },
+      },
+    });
+  }
+});
+
   </script>
 </body>
 </html>
