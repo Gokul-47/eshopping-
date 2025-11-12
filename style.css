@@ -318,6 +318,9 @@
 .footer-top ul li a:hover {
   color: #222;
 }
+.footer-col{
+  text-align: left;
+}
 
 .social-icons a img {
   width: 25px;
@@ -360,6 +363,9 @@ footer {
   .product-section {
     padding: 20px;
   }
+}
+.footer-col{
+  text-align: center;
 }
 
 .btn-load {
