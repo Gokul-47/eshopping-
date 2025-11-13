@@ -62,6 +62,36 @@ body {
   cursor: pointer;
   transition: 0.3s;
 }
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.qty-btn {
+  background: #ffcc00;
+  border: none;
+  padding: 5px 10px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #000;
+  transition: 0.2s;
+}
+
+.qty-btn:hover {
+  background: #ffd633;
+}
+
+.qty-value {
+  font-weight: bold;
+  font-size: 16px;
+  color: #000;
+}
+
 
 #proceed-pay:hover {
   background: #ffd633;
@@ -160,8 +190,7 @@ body {
       <li>Emai:<a href="mailto:info@yourcompany">info@yourcompany</a></li>
       <li>Ph: 1234567890</li>
       <li>Address : 12, Tech Park Street, Chennai, India</li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="dashboard.html">Dashboard</a></li>
+      
     </ul>
   </div>
 
@@ -183,62 +212,88 @@ body {
   <script src="script.js"></script>
   <!-- Cart Script -->
   <script>
-    
 function loadCart() {
   let cart = JSON.parse(localStorage.getItem("cart"));
-
-  // ✅ Ensure cart is always an array
   if (!Array.isArray(cart)) cart = [];
 
   const container = document.getElementById("cart-items");
-  if (!container) return; // Prevent errors if element missing
+  if (!container) return;
   container.innerHTML = "";
 
-  // ✅ Empty cart message
   if (cart.length === 0) {
     container.innerHTML = "<p>Your cart is empty.</p>";
+    document.getElementById("cart-total").textContent = "0";
     return;
   }
 
-  // ✅ Render each cart item safely
   cart.forEach((product, index) => {
     const card = document.createElement("div");
     card.classList.add("cart-item");
 
-    // Escape unsafe content (basic sanitization)
     const name = String(product.name || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     const price = String(product.price || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     const img = String(product.img || "");
+    const quantity = Number(product.quantity) || 1;
 
     card.innerHTML = `
       <img src="${img}" alt="${name}" loading="lazy" />
       <div class="cart-info">
         <h4>${name}</h4>
         <p>${price}</p>
+        <div class="quantity-control">
+          <button class="qty-btn" data-action="decrease">−</button>
+          <span class="qty-value">${quantity}</span>
+          <button class="qty-btn" data-action="increase">+</button>
+        </div>
         <button aria-label="Remove ${name} from cart" class="remove-btn">Remove</button>
       </div>
     `;
 
-    // ✅ Add event listener for removal
+    // Quantity buttons
+    const qtyBtns = card.querySelectorAll(".qty-btn");
+    qtyBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const action = btn.dataset.action;
+        updateQuantity(index, action);
+      });
+    });
+
+    // Remove button
     card.querySelector(".remove-btn").addEventListener("click", () => {
       removeFromCart(index);
     });
 
     container.appendChild(card);
   });
+
+  updateCartTotal();
 }
 
+function updateQuantity(index, action) {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  if (!Array.isArray(cart)) cart = [];
+  let item = cart[index];
+  if (!item) return;
+
+  item.quantity = Number(item.quantity) || 1;
+  if (action === "increase") item.quantity++;
+  if (action === "decrease" && item.quantity > 1) item.quantity--;
+
+  cart[index] = item;
+  localStorage.setItem("cart", JSON.stringify(cart));
+  loadCart();
+  updateCartCount();
+}
 
 function removeFromCart(index) {
   let cart = JSON.parse(localStorage.getItem("cart"));
   if (!Array.isArray(cart)) cart = [];
   cart.splice(index, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
-  loadCart(); // re-render
-  updateCartCount(); // optional: update count in navbar
+  loadCart();
+  updateCartCount();
 }
 
-// Also update cart count in navbar
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const countEl = document.getElementById("cart-count");
@@ -250,29 +305,21 @@ function updateCartTotal() {
   let total = 0;
 
   cart.forEach(item => {
-    // Remove ₹ and commas, convert to number
     let priceNum = Number(item.price.replace(/₹|,/g, ""));
-    total += priceNum;
+    total += priceNum * (item.quantity || 1);
   });
 
   document.getElementById("cart-total").textContent = total.toLocaleString();
 }
 
 document.getElementById("proceed-pay").addEventListener("click", () => {
- 
-  // Here you can redirect to payment page
   window.location.href = "404.html";
 });
 
-
-// Call it after rendering cart items
-updateCartTotal();
-
-
-// Initialize cart on page load
 loadCart();
 updateCartCount();
 </script>
+
 
   
 </body>
