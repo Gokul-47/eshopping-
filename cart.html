@@ -211,8 +211,8 @@ body {
 
   <script src="script.js"></script>
   <!-- Cart Script -->
-  <script>
-function loadCart() {
+   <script>
+  function loadCart() {
   let cart = JSON.parse(localStorage.getItem("cart"));
   if (!Array.isArray(cart)) cart = [];
 
@@ -223,6 +223,7 @@ function loadCart() {
   if (cart.length === 0) {
     container.innerHTML = "<p>Your cart is empty.</p>";
     document.getElementById("cart-total").textContent = "0";
+    updateCartCount(); // ensure count is updated to 0
     return;
   }
 
@@ -267,6 +268,7 @@ function loadCart() {
   });
 
   updateCartTotal();
+  updateCartCount(); // update count whenever cart is loaded
 }
 
 function updateQuantity(index, action) {
@@ -281,8 +283,7 @@ function updateQuantity(index, action) {
 
   cart[index] = item;
   localStorage.setItem("cart", JSON.stringify(cart));
-  loadCart();
-  updateCartCount();
+  loadCart(); // this will now update cart count as well
 }
 
 function removeFromCart(index) {
@@ -290,14 +291,17 @@ function removeFromCart(index) {
   if (!Array.isArray(cart)) cart = [];
   cart.splice(index, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
-  loadCart();
-  updateCartCount();
+  loadCart(); // updates count too
 }
 
+// Updated: sum of all quantities instead of just number of items
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const countEl = document.getElementById("cart-count");
-  if (countEl) countEl.textContent = cart.length;
+  if (countEl) {
+    const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    countEl.textContent = totalQuantity;
+  }
 }
 
 function updateCartTotal() {
@@ -319,7 +323,6 @@ document.getElementById("proceed-pay").addEventListener("click", () => {
 loadCart();
 updateCartCount();
 </script>
-
 
   
 </body>
