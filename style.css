@@ -638,20 +638,6 @@ footer {
 .footer-col img {
   height: 50px;
 }
-/* iPhone Safe Footer Fix */
-@supports (-webkit-touch-callout: none) {
-  .footer-top {
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    justify-content: center !important;
-  }
-
-  .footer-col {
-    width: 100% !important;
-    max-width: 350px !important;
-  }
-}
 
 
 
