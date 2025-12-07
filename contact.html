@@ -247,5 +247,41 @@
       }
     }
   </script>
+  <script>
+function handleContact(event) {
+    event.preventDefault(); // Stop normal submit
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+    const status = document.getElementById("form-status");
+
+    // Clear previous message
+    status.innerText = "";
+    status.style.color = "red";
+
+    // Email pattern
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Validation
+    if (name === "") {
+        status.innerText = "Name cannot be empty.";
+        return false;
+    }
+    if (!emailPattern.test(email)) {
+        status.innerText = "Enter a valid email.";
+        return false;
+    }
+    if (message === "") {
+        status.innerText = "Message cannot be empty.";
+        return false;
+    }
+
+    // SUCCESS → Redirect to 404 page
+    window.location.href = "404.html";
+    return true; // allow redirect
+}
+</script>
+
 </body>
 </html>
